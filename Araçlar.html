@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkaslanTurizm</title>
+
+
+     <!---custom css link--->
+
+        <link href="stil_dosyasi.css" type="text/css" rel="stylesheet"/>
+
+    <!---boxicons link-->
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+
+       <!---google fonts link-->
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?
+       family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+.vehicle-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.vehicle-card:hover {
+    transform: scale(1.05);
+}
+.vehicle-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+.modal-content img {
+    width: 100%;
+    border-radius: 5px;
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Open Sans',sans-serif;
+    
+}
+
+
+
+:root{/* Genel Ayarlar */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden; /* Yatay kaydırma engelleniyor */
+    }
+    
+
+    
+    /* İçerik Alanı */
+    .container {
+        flex-grow: 1; /* İçeriğin esnemesini sağlar */
+    }
+    
+    /* Footer Düzenlemesi */
+    footer {
+        background: #222;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+        position: relative;
+        bottom: 0;
+        margin-top: auto; /* Footer'ı alt kısma yerleştirir */
+    }
+    
+    
+    /* Footer'ın alt kısımdan doğru şekilde görünmesini sağlar */
+    footer {
+        position: relative;
+        margin-top: auto; /* Footer, sayfa altına itilir */
+    }
+    
+    --text-color:#000000;
+    --bg-color:#ffffff;
+    --main-color:#ffa343;   
+
+    --h1-font: 6rem;
+    --h2-font:3rem;
+    --p-font: 1rem;
+}
+body{
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    background: transparent;
+    padding: 27px 17%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .50s ease;
+
+}
+.btn:hover{
+    transform: translateX(10px);
+    border: 2px solid var(--text-color);
+    background: transparent;
+    color: var(--text-color);
+}
+header.sticky{
+    padding: 8px 10%;
+    background: transparent;
+    backdrop-filter: blur(35px);
+}
+.logo{
+    font-size: 25px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+span{
+    color: var(--main-color);
+}
+.navbar{
+    display: flex;
+}
+.navbar a{
+    color: var(--text-color);
+    font-size: var(--p-font);
+    font-weight: 500;
+    margin: 15px 22px;
+    transition: all .50s ease;
+}
+.navbar a:hover{
+    color: var(--main-color);
+}
+.h-right{
+    display: flex;
+    align-items: center;
+}
+.h-right a:first-child{
+    color: var(--text-color);
+    font-size: var(--p-font);
+    margin-right: 20px;
+}
+.h-right a{
+    vertical-align: middle;
+    font-size: 20px;
+    color: var(--text-color);
+    margin-right: 18px;
+    margin-left: 5px;
+    transition: all .50s ease;
+}
+.h-right a:hover{
+    color: var(--main-color);
+    transform: translateY(-3px);
+}
+#menu-icon{
+    color: var(--text-color);
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+}
+
+section{
+    padding: 70px 17px 60px;
+}
+.home{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to left,rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url();
+
+    background-size: cover;
+    background-position: bottom center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.home-text h5{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--main-color);
+}
+.home-text h1{
+    font-size: var(--h2-font);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+.home-text p{
+    font-size: var(--p-font);
+    font-weight: 500;
+    line-height: 30px;
+    color: #ffffffab;
+    margin-bottom: 35px;
+}
+.başlık{
+    text-align: center;
+}
+.footer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    gap: 2rem;
+}          
+.footer-box{
+    display: flex;
+    flex-direction: column;
+} 
+.footer-box h3{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.footer-box a{
+    color: #979797;
+    margin-bottom: 0.8rem;
+    transition: all .50s ease;
+}   
+.footer-box a:hover{
+    transform: translateX(-5px);
+    color: var(--text-color);
+}
+.social a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 45px;
+    background: #706d6d;
+    color: var(--text-color);
+    font-size: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+    transition: transform 0.6s;
+}
+.social a:hover{
+    background: var(--main-color);
+    color: var(--bg-color);
+    transform: translateX(-4px);
+}
+
+.copyright p{
+    text-align: center;
+    padding: 20px;
+    color: #979797;
+    font-size: 15px;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+<!---header design-->
+<header class="sticky">
+    <img src="resim/logo.png" height="105">
+
+    <a href="#" class="logo"  onclick="window.location.href='index.html'">AKASLAN<span>TURİZM</span></a>
+
+    <ul class="navbar">
+        <li><a href="#" onclick="window.location.href='Servisler.html'">Servisler</a></li>
+        <li><a href="#" onclick="window.location.href='Araçlar.html'">Araçlar</a></li>          
+        <li><a href="#" onclick="window.location.href='hakkımızda.html'">Hakkımızda</a></li>
+        <li><a href="#">İletişim</a></li>
+    </ul>
+
+    <div class="h-right">
+        <a href="#">Bizi Takip Edin</a>
+        <a href="https://www.instagram.com/akaslanturizm/"><i class="ri-instagram-fill"></i></a>
+        <a href="https://whatsapp/05354940385"><i class="ri-whatsapp-fill"></i></i></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+    </div>
+</div>
+
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br>
+<div class="başlık">
+        
+    <a href="#" class="logo">ARAÇ<span>LAR</span></a>
+    <div class="filter-buttons">
+        
+        
+    </div>
+    <div class="container">
+        <div class="vehicle-card" onclick="showDetails('vip-minibus.jpg', 'VIP Minibüs', 'Konforlu ve lüks minibüs transferi.')">
+            <img src="resim/16e6f478-1623-4b47-aa63-f218a8a538d4.jpg"VIP Minibüs">
+            <h3>VIP Minibüs</h3>
+            <p>Konforlu ve lüks  transferi.</p>
+        </div>
+        <div class="vehicle-card" onclick="showDetails('sedan.jpg', 'Sedan Araç', 'Özel şoförlü sedan araç hizmeti.')">
+            <img src="resim/072af0c3-e5c9-4558-bcb8-021d57021130.jpg" alt="Sedan Araç">
+            <h3>VIP Araç</h3>
+            <p>Özel şoförlü  araç hizmeti.</p>
+        </div>
+        <div class="vehicle-card" onclick="showDetails('suv.jpg', 'Lüks SUV', 'Geniş ve rahat SUV araç transferi.')">
+            <img src="resim/68b97717-6d95-4033-92b6-d71c4cbe8f9a.jpg" alt="Lüks SUV">
+            <h3>Lüks ARAÇ</h3>
+            <p>Geniş ve rahat araç transferi.</p>
+        </div>
+        <div class="vehicle-card" onclick="showDetails('economy.jpg', 'Ekonomik Araç', 'Uygun fiyatlı ve konforlu yolculuk.')">
+            <img src="resim/ca024f78-9b31-4c8e-84d5-d031725598d9.jpg" alt="Ekonomik Araç">
+            <h3>Ekonomik Araç</h3>
+            <p>Uygun fiyatlı ve konforlu yolculuk.</p>
+        </div>
+    </div><div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-img" src="" alt="">
+        <h2 id="modal-title"></h2>
+        <p id="modal-desc"></p>
+    </div>
+</div>
+
+
+<!---footer section design-->
+<section class="footer">
+    <div class="footer-box">
+        <h3>Hizmetler</h3>
+        <a href="#">E-posta Pazarlama</a>
+        <a href="#">Kampanyalar</a>
+        <a href="#">Markalaşma</a>
+        <a href="#">Çevrimdışı</a>
+    </div>
+
+
+    <div class="footer-box">
+        <h3>Hakkında</h3>
+        <a href="#">Hikayemiz</a>
+        <a href="#">Faydalar</a>
+        <a href="#">Takım</a>
+        <a href="#">Kariyerler</a>
+    </div>
+
+
+
+    <div class="footer-box">
+        <h3>Yardım</h3>
+        <a href="#">SSS</a>
+        <a href="#">Bize ulaşın</a>
+        <a href="tel:+90 5354940385" class="musterihizmet">
+            <div class="icon">
+                <i class="las la-headset"></i>
+            </div>
+            <div class="yazi">
+                Müşteri Servisi							<b>+90 535 494 03 85</b>
+            </div>
+        </a>
+    </div>
+
+
+
+    <div class="footer-box">
+        <h3>Sosyal</h3>
+       <div class="social">
+        <a href="https://www.instagram.com/akaslanturizm/"><i class="ri-instagram-fill"></i></a>
+        <a href="https://whatsapp/05354940385"><i class="ri-whatsapp-fill"></i></i></a>
+       </div>
+    </div>
+
+
+    
+ </section>
+
+
+
+<!---footer section design-->
+
+
+
+<div class="copyright">
+    <p>telif hakkı 2025 AkaslanTurizm</p>
+</div>
+
+
